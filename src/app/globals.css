@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap');
+
+@layer base {
+  :root {
+    --background: 0 0% 13%;
+    --foreground: 40 15% 85%;
+
+    --card: 25 15% 12%;
+    --card-foreground: 40 15% 85%;
+
+    --popover: 25 15% 12%;
+    --popover-foreground: 40 15% 85%;
+
+    --primary: 127 69% 65%;
+    --primary-foreground: 20 18% 8%;
+
+    --secondary: 25 12% 18%;
+    --secondary-foreground: 40 15% 75%;
+
+    --muted: 25 10% 16%;
+    --muted-foreground: 30 10% 50%;
+
+    --accent: 127 69% 65%;
+    --accent-foreground: 20 18% 8%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 30 15% 20%;
+    --input: 30 15% 20%;
+    --ring: 127 69% 65%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 13%;
+    --sidebar-foreground: 40 15% 85%;
+    --sidebar-primary: 127 69% 65%;
+    --sidebar-primary-foreground: 20 18% 8%;
+    --sidebar-accent: 25 12% 18%;
+    --sidebar-accent-foreground: 40 15% 85%;
+    --sidebar-border: 30 15% 20%;
+    --sidebar-ring: 127 69% 65%;
+
+    /* Custom tokens */
+    --gold: 127 69% 65%;
+    --gold-dim: 127 69% 65%;
+    --surface: 25 15% 12%;
+    --surface-hover: 25 15% 16%;
+    --text-dim: 30 10% 50%;
+    --text-bright: 40 20% 92%;
+    --section-line: 30 15% 25%;
+
+    /* Category colors */
+    --cat-green: 142 50% 45%;
+    --cat-red: 0 60% 50%;
+    --cat-blue: 210 60% 50%;
+    --cat-purple: 270 50% 55%;
+    --cat-yellow: 127 69% 65%;
+    --cat-cyan: 180 50% 45%;
+    --cat-orange: 25 80% 50%;
+    --cat-pink: 330 50% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Playfair Display', serif;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 3px;
+}
+
+/* Animations */
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.6s ease-out forwards;
+}
