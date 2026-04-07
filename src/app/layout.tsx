@@ -1,12 +1,32 @@
 import type { ReactNode } from "react";
+import type { Metadata } from "next";
 import "./globals.css";
 import Providers from "./providers";
 
+const blankFavicon =
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1' viewBox='0 0 1 1'%3E%3C/svg%3E";
+
+export const metadata: Metadata = {
+  icons: {
+    icon: [
+      { url: blankFavicon, type: "image/svg+xml", sizes: "1x1" },
+    ],
+    shortcut: [
+      { url: blankFavicon, type: "image/svg+xml", sizes: "1x1" },
+    ],
+    apple: [
+      { url: blankFavicon, type: "image/svg+xml", sizes: "1x1" },
+    ],
+  },
+};
 
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="icon" href={blankFavicon} />
+      </head>
       <body>
         <Providers>{children}</Providers>
       </body>
