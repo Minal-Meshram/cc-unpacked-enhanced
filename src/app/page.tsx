@@ -20,21 +20,26 @@ const Page = () => {
   const [showSidebar, setShowSidebar] = useState(false);
   const agentLoopRef = useRef<HTMLElement>(null);
 
-  // Show sidebar when Agent Loop section is 40% visible
+  // Show sidebar only after Agent Loop enters the viewport, hide after Footer passes
   useEffect(() => {
-      console.log('agentLoopRef.current:', agentLoopRef.current);
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setShowSidebar(entry.isIntersecting && entry.intersectionRatio >= 0.4);
-      },
-      { threshold: 0.1, rootMargin: "0px 0px -100px 0px" }
-    );
+    const update = () => {
+      const agentEl = document.getElementById("agent-loop");
+      const footerEl = document.getElementById("footer");
+      if (!agentEl || !footerEl) return;
 
-    if (agentLoopRef.current) {
-      observer.observe(agentLoopRef.current);
-    }
+      const vh = window.innerHeight || 0;
+      const start = agentEl.getBoundingClientRect().top <= vh * 0.2;
+      const end = footerEl.getBoundingClientRect().top <= -vh * 0.2;
+      setShowSidebar(start && !end);
+    };
 
-    return () => observer.disconnect();
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
   }, []);
 
   // Update active section based on scroll position (for sidebar highlighting)
@@ -65,21 +70,23 @@ const Page = () => {
       <HeroSection />
 
       {/* Two‑column layout for content after hero */}
-      <div className="relative max-w-7xl mx-auto px-4 lg:px-6">
+      <div
+        className={`relative max-w-7xl mx-auto px-4 lg:px-8 ${
+          showSidebar ? "lg:pl-40" : ""
+        }`}
+      >
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Sidebar column – only visible when agent loop is scrolled into view */}
-          {showSidebar && (
-            <aside className="lg:w-24 xl:w-32 shrink-0 transition-all duration-300">
-              <SectionNav activeSection={activeSection} />
-            </aside>
-          )}
+          {showSidebar && <SectionNav activeSection={activeSection} />}
 
           {/* Main content column – narrower when sidebar is visible */}
-          <div className={`flex-1 ${showSidebar ? "lg:max-w-3xl xl:max-w-4xl" : "mx-auto"}`}>
+          <div className={`flex-1 ${showSidebar ? "lg:max-w-5xl xl:max-w-5xl" : "mx-auto"}`}>
             {/* Pass ref to AgentLoopSection (needs forwardRef) */}
             <AgentLoopSection ref={agentLoopRef} />
             {/* <ArchitectureSection /> */}
-            <DynamicTreemap />
+            <section id="architecture">
+              <DynamicTreemap />
+            </section>
             <ToolSystemSection />
             <CommandCatalogSection />
             <HiddenFeaturesSection />
@@ -94,3 +101,5 @@ const Page = () => {
 };
 
 export default Page;
+
+
