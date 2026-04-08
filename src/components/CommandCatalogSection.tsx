@@ -87,8 +87,7 @@ const CommandCatalogSection = () => {
       </div>
       <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4">Command Catalog</h2>
       <p className="text-muted-foreground text-lg mb-12">
-        Every slash command available in Claude Code, sorted by what it does.
-      </p>
+A modern data visualization project that transforms complex datasets into an interactive treemap for better insights and user experience.      </p>
 
       <div className="space-y-10">
         {commandGroups.map((group) => (
