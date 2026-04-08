@@ -90,7 +90,7 @@ const ToolSystemSection = () => {
         </div>
         <h2 className="text-4xl md:text-5xl font-serif font-bold mt-4">Tool System</h2>
         <p className="text-muted-foreground text-lg mt-3 max-w-2xl">
-          Every built-in tool Claude Code can call, sorted by what it does.
+          Every built-in tool can call, sorted by what it does.
         </p>
       </div>
 
