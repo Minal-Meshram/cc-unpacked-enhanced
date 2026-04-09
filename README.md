@@ -29,7 +29,7 @@ Screenshots:
 ![Treemap View](./screenshots/Treemap.png)
 
 ### Agent
-![Agent lOOP](./Screenshots/AgentLoop.png)
+![Agent lOOP](./Screenshots/AgentLoop1.png)
 
 ### Tool System
 ![Toolsystem](./Screenshots/ToolSystem.png)
